@@ -1,0 +1,10 @@
+{
+  "realm": "TaskVault_Core",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "external",
+  "resource": "TaskVaultApp",
+  "credentials": {
+    "secret": "vFzghkicfGSip5R3Z1a5d1wjwi3qQoru"
+  },
+  "confidential-port": 0
+}
