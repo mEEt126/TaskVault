@@ -14,18 +14,20 @@ const keycloakConfig = {
 
 exports.register = async(request, response) => {
     try{
-        const {userName, emailId, phoneNo, password} = request.body; 
+        const {username, email, firstName, lastName, password} = request.body; 
         
         console.log("we have received request:" + request.body)
+        console.log(request.kauth.grant.access_token.token)
 
         const responseFromKeycloak = await axios.post(
-            `${process.env.KEYCLOAK_AUTH_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
+            `${process.env.KEYCLOAK_AUTH_URL}/admin/realms/${process.env.KEYCLOAK_REALM}/users`,
             {
-                userName,
-                emailId,
-                phoneNo,
+                username,
+                email,
+                firstName,
+                lastName,
                 enabled: true,
-                Credential: [{type: 'password', value: password, temporary: false}]
+                credentials: [{type: 'password', value: password, temporary: false}]
             },
             {
                 headers:{
@@ -33,14 +35,24 @@ exports.register = async(request, response) => {
                     'Content-Type': 'application/json' 
                 }
             }
-        );
-        console.log("successfull")
+        ); 
+        console.log("registred successfull")   /// need to chain it 
+        
+        
+        const userServiceUrl = 'http://localhost:3002/users'; 
+            await axios.post(userServiceUrl, {
+                username,
+                emailId: email,
+                password,  // hash before storing
+                phoneNo
+            });
+
         response.status(201).json({message: 'User registered Successfully'})
         // POST API TO USER SERVICE TO CREATE NEW RECORD
         // FINALLY create event -  EVENT TYPE as USER_REGISTERD 
     }
     catch(error){
-        console.log(error.message)
+        console.log('Error getting registered:', error.response ? error.response.data : error.message)
         response.status(500).json({error: error.message})
     }
 }

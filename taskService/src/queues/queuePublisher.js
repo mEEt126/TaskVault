@@ -4,7 +4,7 @@ let channel;
 
 const connectQueue = async () => {
   try {
-    const connection = await amqp.connect('amqp://localhost:5672'); // Change port if not default
+    const connection = await amqp.connect('amqp://localhost:5672'); //defalut port is 5672
     channel = await connection.createChannel();
     await channel.assertQueue('task_event_queue', { durable: true });
   } catch (error) {
