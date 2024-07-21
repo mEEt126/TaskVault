@@ -1,9 +1,18 @@
 const { Task, UserTask } = require('../models');
+const { publishMessage } = require('../queues/queuePublisher.js');
 
 exports.createTask = async (req, res) => {
   try {
     const { title, description, userId, dueDate } = req.body;
     const task = await Task.create({ title, description, userId, dueDate });
+
+    const event = {
+      eventType : "TASK_CREATED",
+      userId,
+      taskId : task.id
+    };
+    await publishMessage(event);
+    
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ error: error.message });
