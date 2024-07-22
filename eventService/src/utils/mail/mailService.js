@@ -4,14 +4,14 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'gandhimeet1389@gmail.com', 
-    pass: '@mjG1998' 
+    pass: 'dutu gprx rvgm sfss' 
   }
 });
 
 const sendEmail = async (event) => {
   const mailOptions = {
     from: 'gandhimeet1389@gmail.com',
-    to: 'recipient-email@gmail.com', // need to get call from user and get email from user table
+    to: 'gandhimeet8187@gmail.com', // need to get call from user and get email from user table
     subject: `Task Event: ${event.eventType}`,
     text: `A task event occurred:\n\nUser ID: ${event.userId}\nTask ID: ${event.taskId}\nEvent Type: ${event.eventType}`
   };

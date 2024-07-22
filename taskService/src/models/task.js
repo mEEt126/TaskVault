@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
     static associate(models) {
       // define association here
-      Task.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
   Task.init({
@@ -22,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'PENDING'
     },
-    dueDate:{
-        dueDate: DataTypes.Date,
+    dueDate: {
+        type: DataTypes.DATE,
         allowNull: true
     }
   }, {

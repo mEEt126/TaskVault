@@ -1,7 +1,8 @@
 const express = require('express');
-const { listenForMessages } = require('./queues/queueListener');
-const eventRoutes = require('./routes/eventRoutes');
-const keycloak = require('./middlewares/keycloak');
+const { listenForMessages } = require('../src/queues/queueSubscriber.js');
+const eventRoutes = require('../src/routes/eventRoute.js');
+const keycloak = require('../src/middlewares/keycloak.js');
+const { sequelize } = require('./models');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -25,4 +26,4 @@ sequelize.authenticate()
     console.log('Error: ' + err);
   });
 
-sequelize.sync();
+sequelize.sync({alter: true});

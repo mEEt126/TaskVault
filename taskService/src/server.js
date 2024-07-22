@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
-const taskRoutes = require('./routes/taskRoutes');
+const taskRoutes = require('../src/routes/taskRoute.js');
 const keycloak = require('./middlewares/keycloak');
 require('dotenv').config();
 
@@ -26,4 +26,4 @@ sequelize.authenticate()
     console.log('Error: ' + err);
   });
 
-sequelize.sync();
+sequelize.sync({alter: true}); // alter will chaange only changes in db when it starts

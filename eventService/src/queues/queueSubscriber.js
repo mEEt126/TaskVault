@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 const { Event } = require('../models');
-const sendEmail = require('../mail/mailService');
+const sendEmail = require('../utils/mail/mailService.js');
 
 const listenForMessages = async () => {
   try{  
