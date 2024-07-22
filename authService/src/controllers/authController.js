@@ -14,7 +14,7 @@ const keycloakConfig = {
 
 exports.register = async(request, response) => {
     try{
-        const {username, email, firstName, lastName, password} = request.body; 
+        const {username, email, firstName, lastName, password, phoneNo} = request.body; 
         
         console.log("we have received request:" + request.body)
         console.log(request.kauth.grant.access_token.token)
@@ -39,13 +39,20 @@ exports.register = async(request, response) => {
         console.log("registred successfull")   /// need to chain it 
         
         
-        const userServiceUrl = 'http://localhost:3002/users'; 
+        const userServiceUrl = 'http://localhost:3001/users/registerUser'; 
             await axios.post(userServiceUrl, {
                 username,
                 emailId: email,
                 password,  // hash before storing
                 phoneNo
-            });
+            },
+            {
+                headers:{
+                    Authorization: `Bearer ${request.kauth.grant.access_token.token}`,
+                    'Content-Type': 'application/json' 
+                }
+            }
+            );
 
         response.status(201).json({message: 'User registered Successfully'})
         // POST API TO USER SERVICE TO CREATE NEW RECORD
@@ -100,10 +107,10 @@ exports.logout = async(request, response) => {
         const { refreshToken } = request.body
 
         await axios.post(
-            `${keycloakConfig.authServerUrl}/realms/${keycloakConfig.realm}/protocol/openid-connect/logout`,
+            `${process.env.KEYCLOAK_AUTH_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/logout`,
             queryString.stringify({
-                client_id: keycloakConfig.clientId,
-                client_secret:keycloakConfig.clientSecret,
+                client_id: process.env.KEYCLOAK_CLIENT_ID,
+                client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
                 refresh_token: refreshToken
             }), 
             {
@@ -112,11 +119,12 @@ exports.logout = async(request, response) => {
                 }
             }
         );
-        response.status(204).json({message: "User logged out Successfully"})
+        response.status(204).json({message: 'User logged out Successfully'})
             // EVENT - USERLOGGED_OUT
     }
     catch(error)
     {
+        console.error('Error:', error.response ? error.response.data : error.message);
         response.status(500).json({error: error.message})
     }
 }

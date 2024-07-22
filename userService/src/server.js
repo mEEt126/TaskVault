@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(express.json())
 app.use(bodyParser.json());
 
 const sessionStore = new SequelizeStore({
@@ -17,7 +18,7 @@ const sessionStore = new SequelizeStore({
 });
 
 app.use(session({
-  secret: 'some secret',
+  secret: 'My TaskVaultApp',
   store: sessionStore,
   resave: false,
   saveUninitialized: true,
@@ -31,6 +32,7 @@ app.use('/users', keycloak.protect(), userRoutes);
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`User Service running on port ${port}`);
+  await sequelize.sync({ alter: true });
 });
