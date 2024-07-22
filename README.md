@@ -1,12 +1,13 @@
-# Project Name: TaskVault 
+# Project Name: TaskVault  
+
 # Objective :  
 Application for managing user's task
 
 ## Project Logo:
-
+![Project Logo](Data/logo.png)
 
 ## Video / Gif:
-
+- Update Soon :smiley:
 
 ## Key Features:
 1. User Authentication & Authorization: Secure authentication using JWT/Keycloak.
