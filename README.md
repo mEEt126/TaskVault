@@ -1,10 +1,7 @@
-# Project Name: TaskVault  
+# Project Name: TaskVault  ![Project Logo](Data/logo.png)
 
 # Objective :  
 Application for managing user's task
-
-## Project Logo:
-![Project Logo](Data/logo.png)
 
 ## Video / Gif:
 - Update Soon :smiley:
@@ -33,7 +30,6 @@ Clone Repository : git clone https://github.com/mEEt126/TaskVault.git
 ## Resources:
 
 ## Contact Info:
-For any inquiries, please contact:
 - Name: Meet Gandhi
 - Email: gandhimeet1389@gmail.com
 - Contact: 9427732664
