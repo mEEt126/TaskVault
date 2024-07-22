@@ -1,4 +1,4 @@
-# Dockerfile for Auth Service
+# Dockerfile for Task Service
 FROM node:14
 
 # Create app directory
@@ -11,5 +11,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
-CMD [ "node", "index.js" ]
+EXPOSE 3002
+CMD [ "node", "server.js" ]
