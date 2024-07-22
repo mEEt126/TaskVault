@@ -2,7 +2,7 @@
 FROM node:14
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/authApp
 
 # Install app dependencies
 COPY package*.json ./
@@ -12,4 +12,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "node", "index.js" ]
+CMD [ "node", "./src/index.js" ]
