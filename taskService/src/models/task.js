@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
     static associate(models) {
       // define association here
+      Task.hasMany(models.UserTask, { foreignKey: 'taskId' });
     }
   }
   Task.init({

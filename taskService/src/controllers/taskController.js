@@ -107,3 +107,64 @@ exports.deleteTask = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getTasksByUserId =  async(req, res) => {
+  try{
+      const { userId } = req.params
+      const userTasks = await UserTask.findAll({
+        where: { userId },
+        include: [Task]
+      });
+
+      if (!userTasks || userTasks.length === 0) {
+        return res.status(404).json({ message: 'No tasks found for this user.' });
+      }
+
+      const tasks = userTasks.map(userTask => userTask.Task);
+      res.status(200).json(tasks);
+  }
+  catch(error)
+  {
+    res.status(500).json({error: error.message})
+  }
+}
+
+exports.getUsersByTaskId = async(req, res) => {
+  try{
+    const { taskId } = req.params
+    const userTask = await UserTask.findAll({
+      where: {taskId},
+      attributes: ['userId']
+  });
+
+    if (!userTask || userTask.length === 0) {
+      return res.status(404).json({ message: 'No users found for this task.' });
+    }
+
+    const userIds = userTask.map(userTask => userTask.userId);
+    res.status(200).json(userIds);
+  
+  }
+  catch(error)
+  {
+    res.status(500).json({error: error.message})
+  }
+}
+
+exports.getStatusOfTask = async(req, res) => {
+  try{
+    const {taskId} = req.params
+    const task = await Task.findByPk(taskId, {
+      attributes: ['status']
+    })
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found.' });
+    }
+
+    res.status(200).json({ status: task.status });
+  }
+  catch(error)
+  {
+    res.status(500).json({error: error.message})
+  }
+}
