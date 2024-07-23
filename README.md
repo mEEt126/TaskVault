@@ -16,6 +16,7 @@ Application for managing user's task
 
 ## How to Use:
 Clone Repository : git clone https://github.com/mEEt126/TaskVault.git
+Kindly visit [Wiki](https://github.com/mEEt126/TaskVault/wiki) for more information. 
  
 ## Frameworks/Technologies Used:
 1. Node.js
