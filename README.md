@@ -11,11 +11,11 @@ Application for managing user's task
 1. User Authentication & Authorization: Secure authentication using JWT/Keycloak.
 2. Task Management: Create, update, delete, and retrieve tasks.
 3. Event Handling: Manage events related to tasks.
-4. Notifications: Real-time notifications using Redis Pub/Sub.
+4. Notifications: Real-time notifications using RabbitMQ Pub/Sub.
 5. Scalable Architecture: Microservices architecture ensuring scalability and maintainability.
 
 ## How to Use:
-Clone Repository : git clone https://github.com/mEEt126/TaskVault.git
+Clone Repository : git clone https://github.com/mEEt126/TaskVault.git 
 Kindly visit [Wiki](https://github.com/mEEt126/TaskVault/wiki) for more information. 
  
 ## Frameworks/Technologies Used:
