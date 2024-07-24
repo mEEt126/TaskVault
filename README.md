@@ -15,7 +15,7 @@ Application for managing user's task
 5. Scalable Architecture: Microservices architecture ensuring scalability and maintainability.
 
 ## How to Use:
-Clone Repository : git clone https://github.com/mEEt126/TaskVault.git 
+Clone Repository : git clone https://github.com/mEEt126/TaskVault.git <br />
 Kindly visit [Wiki](https://github.com/mEEt126/TaskVault/wiki) for more information. 
  
 ## Frameworks/Technologies Used:
